@@ -1,8 +1,6 @@
 from Model.Solver import Solver
-from View.gui import Gui
 from kivy.clock import Clock
-import time
-import random
+
 
 
 class SudokuController:

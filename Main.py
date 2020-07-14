@@ -30,9 +30,3 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run()
-
-# solver = Solver.Solver()
-#
-# run = True
-#
-# while run:
