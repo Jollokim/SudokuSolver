@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.config import Config
 
-from controller import Controller
+from controller.controller import Controller
 from view.gui import Gui
 
 
