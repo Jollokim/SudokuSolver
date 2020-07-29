@@ -14,15 +14,10 @@ class MyApp(App):
         Config.set('graphics', 'width', '700')
         Config.set('graphics', 'height', '700')
 
-
-
         gui = Gui()
-
-
 
         global controller
         controller = Controller(gui)
-
 
         return gui
 
