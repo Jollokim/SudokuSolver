@@ -1,4 +1,4 @@
-from Model.Spot import Spot
+from model.spot import Spot
 import math
 
 
@@ -9,9 +9,8 @@ class Solver:
         self.col = 0
         self.solved = False
         self.tracked_back = False
-        self.stopSlowSolve = False
+        self.stop_slow_solve = False
         self.solving = False
-
 
         for row in range(9):
             self.spots.append([])
@@ -24,18 +23,19 @@ class Solver:
         for row in range(9):
             for col in range(9):
 
-
                 if self.spots[row][col].unchangeable:
-                    self.spots[row][col].legalNumber = self.checkNumberLegal(self.spots[row][col].num, row, col)
+                    self.spots[row][col].legal_number = self.check_number_legal(self.spots[row][col].num, row, col)
                     continue
 
                 self.spots[row][col].possible_nums.clear()
+
+                # finds numbers that could fit in a pos
                 for num in range(1, 10):
-                    if self.checkNumberLegal(num, row, col):
+                    if self.check_number_legal(num, row, col):
                         self.spots[row][col].possible_nums.append(num)
 
 
-    def checkNumberLegal(self, num, row, col):
+    def check_number_legal(self, num, row, col):
         if num == "":
             return True
 
@@ -63,20 +63,19 @@ class Solver:
             elif num == self.spots[i][col].num:
                 return False
 
-
-        # if it fits
+        # if it fits :smirk:
         return True
 
 
-    def plusSpotVal(self, row, col):
-        self.spots[row][col].plussOne()
+    def plus_spot_val(self, row, col):
+        self.spots[row][col].pluss_one()
 
-        self.spots[row][col].legalNumber = self.checkNumberLegal(self.spots[row][col].num, row, col)
+        self.spots[row][col].legal_number = self.check_number_legal(self.spots[row][col].num, row, col)
 
         self.update_model()
 
 
-    def resetAll(self):
+    def reset_all(self):
         print("Modell reset!")
 
         for row in range(9):
@@ -92,7 +91,7 @@ class Solver:
     def is_solveable(self):
         for row in self.spots:
             for spot in row:
-                if not spot.legalNumber:
+                if not spot.legal_number:
                     return False
         return True
 
@@ -116,15 +115,15 @@ class Solver:
 
         self.tracked_back = True
 
-    def fastSolve(self):
+    def fast_solve(self):
         if self.is_solveable():
 
 
             while not self.solved:
-                self.slowSolve()
+                self.slow_solve()
 
 
-    def slowSolve(self):
+    def slow_solve(self):
         self.solving = True
 
         try:
@@ -146,13 +145,13 @@ class Solver:
         print("row:", str(self.row), "col:", str(self.col))
 
         possible_nums = self.spots[self.row][self.col].possible_nums
-        possible_counter = self.spots[self.row][self.col].possibleCounter
+        possible_counter = self.spots[self.row][self.col].possible_counter
 
         if self.tracked_back:
-            possible_counter +=1
+            possible_counter += 1
             if possible_counter >= len(possible_nums):
                 print("nothing fits")
-                self.spots[self.row][self.col].possibleCounter = 0
+                self.spots[self.row][self.col].possible_counter = 0
                 self.spots[self.row][self.col].num = ""
                 self.track_back_spot()
                 return
@@ -162,8 +161,8 @@ class Solver:
         print(possible_nums)
         print(number_to_test)
 
-        while not self.checkNumberLegal(number_to_test, self.row, self.col):
-            possible_counter +=1
+        while not self.check_number_legal(number_to_test, self.row, self.col):
+            possible_counter += 1
 
             try:
                 number_to_test = possible_nums[possible_counter]
@@ -171,7 +170,7 @@ class Solver:
             except:
                 # none fit
                 print("nothing fits back tracking")
-                self.spots[self.row][self.col].possibleCounter = 0
+                self.spots[self.row][self.col].possible_counter = 0
                 self.spots[self.row][self.col].num = ""
                 self.track_back_spot()
                 return
@@ -179,7 +178,7 @@ class Solver:
 
         # number fits
         print("number fits")
-        self.spots[self.row][self.col].possibleCounter = possible_counter
+        self.spots[self.row][self.col].possible_counter = possible_counter
         self.spots[self.row][self.col].num = number_to_test
 
         self.track_forth_spot()

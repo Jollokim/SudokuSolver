@@ -5,11 +5,11 @@ class Spot:
         for num in range(1,10):
             self.possible_nums.append(num)
 
-        self.possibleCounter = 0
+        self.possible_counter = 0
         self.unchangeable = False
-        self.legalNumber = True
+        self.legal_number = True
 
-    def plussOne(self):
+    def pluss_one(self):
         try:
             number = int(self.num)
         except:
@@ -27,8 +27,6 @@ class Spot:
 
         if self.num == "":
             self.unchangeable = False
-
-
 
 
     def __str__(self):

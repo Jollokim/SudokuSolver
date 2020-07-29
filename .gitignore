@@ -1,1 +1,6 @@
-__pychache__
+/.idea
+/build
+/dist
+__pycache__/
+*.py[cod]
+SudokuSolver.spec

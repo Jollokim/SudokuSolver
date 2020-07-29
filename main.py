@@ -1,9 +1,8 @@
 from kivy.app import App
 from kivy.config import Config
 
-
-from Controller.SudokuController import SudokuController
-from View.gui import Gui
+from controller import Controller
+from view.gui import Gui
 
 
 
@@ -22,7 +21,7 @@ class MyApp(App):
 
 
         global controller
-        controller = SudokuController(gui)
+        controller = Controller(gui)
 
 
         return gui
