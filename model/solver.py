@@ -63,7 +63,7 @@ class Solver:
             elif num == self.spots[i][col].num:
                 return False
 
-        # if it fits :smirk:
+        # if it fits 
         return True
 
 
